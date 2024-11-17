@@ -10,7 +10,7 @@ class Budget:
         self.monthly_expenses = defaultdict(lambda: defaultdict(float)) # month -> category -> expenses sum
         
     
-    def set_limits(self, category: str, amount: float):
+    def set_limit(self, category: str, amount: float):
         """Sets a spending limit for a specific category."""
         if amount < 0:
             raise ValueError("Limit cannot be negative")
@@ -36,7 +36,7 @@ class Budget:
         for category, limit in self.limits.items():
             if self.monthly_expenses[current_month][category] > limit:
                 warnings.append(f"Warning: Spending for {category} exceeded its limit")
-            elif self.monthly_expenses[current_month][category] > 0.9 * limit:
+            elif self.monthly_expenses[current_month][category] >= 0.9 * limit:
                 warnings.append(f"Warning: Spending for {category} is approaching its limit")
         
         return warnings
