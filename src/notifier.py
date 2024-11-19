@@ -33,7 +33,7 @@ class Notifier:
         """Starts the notifier in a background thread."""  
         if not self.running:
             self.running = True
-            self.thread = threading.Thread(target=self._run)
+            self.thread = threading.Thread(target=self._run, daemon=True)
             self.thread.start()
             print("Notifier started")
     
@@ -41,10 +41,12 @@ class Notifier:
     @log_action        
     def stop(self):
         """Stops the notifier."""
-        if self.running:
-            self.running = False
-            self.thread.join()
-            print("Notifier stopped")
+        if not self.running:
+            print("Notifier is not running")
+            return 
+        self.running = False
+        self.thread.join()
+        print("Notifier stopped")
             
     
     

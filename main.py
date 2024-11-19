@@ -60,7 +60,6 @@ def main():
         print(f"Added expense: {expense}")
 
     
-    elif args.command == "set-limit":
         budget.set_limit(category=args.category, amount=args.amount)
         print(f"Set limit: {args.category} - {args.amount}")
         
@@ -72,7 +71,7 @@ def main():
     
     elif args.command == "start-notifier":
         notifier.start()
-        print("Notifier started, you will receive budget limit warnings")
+        print("Notifier started, you will receive budget limit warnings\n")
 
 
     elif args.command == "stop-notifier":
